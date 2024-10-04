@@ -11,7 +11,8 @@ WORKDIR /app
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-COPY requirements.txt /app
+ARG SOURCE_DIR
+COPY $SOURCE_DIR/requirements.txt /app
 RUN pip install --no-cache-dir -r requirements.txt
 
 FROM python:3.12.6-alpine as runner
@@ -20,7 +21,5 @@ WORKDIR /app
 COPY --from=compiler /opt/venv /opt/venv
 
 ENV PATH="/opt/venv/bin:$PATH"
-
-COPY src /app
 
 CMD ["python", "main.py"]

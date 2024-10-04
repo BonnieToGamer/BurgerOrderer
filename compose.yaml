@@ -1,0 +1,26 @@
+services:
+  burger_orderer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SOURCE_DIR: ./burger_orderer
+    container_name: burger_orderer_container
+    ports: 
+      - "8080:8080"  # general UI
+      - "8081:8081"  # websocket
+    volumes:
+      - ./burger_orderer/src:/app
+
+  kitchen_view:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SOURCE_DIR: ./kitchen_view
+    container_name: kitchen_view_container
+    ports:
+      - "8090:8080"  # general UI
+      - "8091:8081"  # websocket
+    volumes:
+      - ./kitchen_view/src:/app
