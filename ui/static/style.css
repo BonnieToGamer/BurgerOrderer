@@ -1,0 +1,150 @@
+
+@font-face {
+    font-family: 'bad_boys_font';
+    src: url(Folder/BADBOYS.TTF);
+}
+
+* {
+box-sizing: content-box;
+margin: 0;
+padding: 0;
+font-family: 'bad_boys_font' ;
+color: white;
+font-weight: normal;
+text-decoration: none;
+}
+
+
+
+body, html {
+    height: 100%;
+    background-image: url( "background_black.jpg" ); 
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    
+    
+}
+
+.logobox a {
+    
+    font-size: 62pt;
+    text-decoration: none;
+    color: white;
+    margin: 1rem;
+
+}
+
+
+
+nav {
+    overflow: hidden;
+    height: 100px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+.nav-items a {
+
+    font-size: 42pt;
+    text-decoration: none;
+    color: white;
+    margin: 0 1.5rem;
+}
+
+
+.burgers-container {
+
+    display: grid;
+    grid-template-columns: repeat(8, 0.5fr);
+    grid-template-rows: repeat(2, 0.5fr);
+    gap: 0.5rem;
+    margin-top: 4rem;
+    position: relative;
+
+}
+
+.burgers {
+
+    width: auto;
+    max-width: 300px;
+    margin: 10px;
+    font-size: 34px;
+    
+
+}
+
+.burgers a {
+   
+    transition: transform 0.5s ease, width 0.5s ease, height 0.5s ease;
+    text-align: center;
+}
+
+.burger-image {
+    
+    width: 100%;
+    max-width: 255px;
+    height: auto;
+    text-align: center;
+    transition: transform 0.5s ease;
+}
+
+
+.burger-price {
+    font-size: 20pt;
+    margin-top: 0.5rem;
+    color: white;
+}
+
+.burgers.active {
+    position: absolute;
+    top: 50%; 
+    right: 20%; 
+    transform: translateY(-50%);
+    z-index: 10; 
+    
+}
+
+.burgers.active .burger-image {
+    width: 500px;
+    max-width: 500px; 
+}
+
+.burgers.active .burger-name {
+    font-size: 46pt;
+    position: absolute;
+    top: 82%; 
+    right: -12%;
+    z-index: 10; 
+    
+}
+
+.burgers.active .burger-price {
+    font-size: 20pt;
+    position: absolute;
+    top: 95%; 
+    right: 10%; 
+    z-index: 10; 
+}
+.order-btn {
+    position: absolute;
+    top: 110%;
+    left: 80%;
+    transform: translate(-50%, -50%); 
+    padding: 10px 20px;
+    font-size: 32px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 10; 
+}
+
+
+.order-btn:hover {
+    background-color: #ddd;
+}
+
