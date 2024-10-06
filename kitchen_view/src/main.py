@@ -1,25 +1,24 @@
 from flask import Flask, request
-from flask_socketio import SocketIO
-from flask_cors import CORS
-import time
-from database_handler import DatabaseHandler, Order
+from typing import TypedDict
+import logging
+
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 
 app = Flask(__name__)
-CORS(app)
-socketio = SocketIO(app)
-db = DatabaseHandler()
 
-# socketio.init_app(app, cors_allowed_origins="*", logger=True, engineio_logger=True)
+# why is this just not in the language?
+class Order(TypedDict):
+    burger: str
+    specials: list [str]
 
-@socketio.on('connect')
-def handle_connect(data):
-    # Add client to the list on connection
-    print(f'Client connected: {request.sid}')
 
-@socketio.on('disconnect')
-def handle_disconnect(data):
-    print(f'Client disconnected: {request.sid}')
-
+def print_order(order: Order):
+    print("Ny beställning:")
+    print("-" * 30)
+    print(f"{'Typ av Burger:':<20} {order['burger'].capitalize()}")
+    print(f"{'Särskilda önskemål:':<20} {', '.join(order['specials']).capitalize() if order['specials'] else 'Inga särskilda önskemål.'}")
+    print("-" * 30 + "\n")
 
 @app.route("/newOrder", methods=["POST"])
 def handle_new_order():
@@ -29,11 +28,8 @@ def handle_new_order():
     except:
         return "error", 400
 
-    order["timestamp"] = time.time()
-    db.create_order(order)
+    print_order(order)
     return "success", 200
 
 if __name__ == '__main__':
-    db.init()
-    db.delete_all_data()
-    socketio.run(app, host='0.0.0.0', port=8090, debug=True, use_reloader=False)
+    app.run(host='0.0.0.0', port=8090)

@@ -13,6 +13,7 @@ services:
     depends_on:
       - kitchen_view
     networks:
+      - database-network
       - client-kitchen-network
 
   kitchen_view:
@@ -31,17 +32,23 @@ services:
     depends_on:
       - mongodb
     networks:
-      - database-network
       - client-kitchen-network
 
   mongodb:
     image: mongo:8.0.0
-    # ports: 
-    #   - "27017:27017"
     volumes:
       - dbdata:/data/db
     networks:
       - database-network
+
+  mongo-express:
+    image: mongo-express:1.0.2-20-alpine3.19
+    ports:
+      - "8081:8081"
+    networks:
+      - database-network
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
 
 volumes:
   dbdata:

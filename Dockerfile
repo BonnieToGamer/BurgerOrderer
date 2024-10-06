@@ -22,4 +22,4 @@ COPY --from=compiler /opt/venv /opt/venv
 
 ENV PATH="/opt/venv/bin:$PATH"
 
-CMD ["python", "main.py"]
+CMD ["python", "-u", "main.py"]
