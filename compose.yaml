@@ -7,10 +7,13 @@ services:
         SOURCE_DIR: ./burger_orderer
     container_name: burger_orderer_container
     ports: 
-      - "8080:8080"  # general UI
-      - "8081:8081"  # websocket
+      - "8080:8080"
     volumes:
       - ./burger_orderer/src:/app
+    depends_on:
+      - kitchen_view
+    networks:
+      - client-kitchen-network
 
   kitchen_view:
     build:
@@ -20,7 +23,31 @@ services:
         SOURCE_DIR: ./kitchen_view
     container_name: kitchen_view_container
     ports:
-      - "8090:8080"  # general UI
-      - "8091:8081"  # websocket
+      - "8090:8090"
     volumes:
       - ./kitchen_view/src:/app
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017/
+    depends_on:
+      - mongodb
+    networks:
+      - database-network
+      - client-kitchen-network
+
+  mongodb:
+    image: mongo:8.0.0
+    # ports: 
+    #   - "27017:27017"
+    volumes:
+      - dbdata:/data/db
+    networks:
+      - database-network
+
+volumes:
+  dbdata:
+
+networks:
+  database-network:
+    driver: bridge
+  client-kitchen-network:
+    driver: bridge

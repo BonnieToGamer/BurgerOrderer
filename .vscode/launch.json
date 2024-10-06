@@ -8,8 +8,14 @@
             "name": "Python Debugger: Application",
             "type": "debugpy",
             "request": "launch",
-            "program": "./src/main.py",
-            "console": "integratedTerminal"
+            "program": "./kitchen_view/src/main.py",
+            "console": "integratedTerminal",
+            "autoReload": {
+                "enable": false,
+                "exclude": [
+                    "**"
+                ]
+            }
         }
     ]
 }
