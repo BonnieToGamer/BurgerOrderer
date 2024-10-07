@@ -1,0 +1,68 @@
+{
+    "Cheeseburger": {
+        "Specials": [
+            "Add pickles",
+            "Add tomatoes",
+            "Remove cheese",
+            "Remove ketchup",
+            "Remove onions"
+        ]
+
+    }, 
+    "Burger 20": {
+        "Specials":[
+            "Add caesar salad sauce",
+            "Add cheese",
+            "Remove pickles",
+            "Remove bacon",
+            "Remove mustard"
+        ]
+    },
+
+    "Jungle burger": {
+        "Specials": [
+            "Add ketchup",
+            "Add onions",
+            "Remove salad",
+            "Remove pickles",
+            "Remove tomato"
+        ]
+    },
+
+    "Flame burger": {
+        "Specials":[
+            "Add bacon",
+            "Add cheese",
+            "Remove chili",
+            "Remove chili sauce"
+        ]
+    },
+
+    "Custom burger": {
+        "Specials":[
+            "Add cheese",
+            "Add bacon",
+            "Add caesar salad sauce",
+            "Add ketchup",
+            "Add onions",
+            "Add pickles",
+            "Add tomatoes",
+            "Add chili",
+            "Add chili sauce",
+            "Add salad",
+            "Add mustard"
+        ]
+    },
+
+    "Veggie burger": {
+        "Specials":[
+            "Add chili",
+            "Add pickles",
+            "Remove Salad",
+            "Remove Tomatoes",
+            "Remove onions",
+            "Remove caesar salad sauce"
+        ]
+    }
+
+}
