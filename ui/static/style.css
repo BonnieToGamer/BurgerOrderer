@@ -24,6 +24,7 @@ body, html {
     background-size: cover;
     
     
+    
 }
 
 .logobox a {
@@ -58,11 +59,13 @@ nav {
 .burgers-container {
 
     display: grid;
-    grid-template-columns: repeat(8, 0.5fr);
-    grid-template-rows: repeat(2, 0.5fr);
-    gap: 0.5rem;
-    margin-top: 4rem;
+    grid-template-columns: repeat(4, 0.2fr);
+    grid-template-rows: repeat(1, 0.2fr);
+    
+    margin-top: 8rem;
+    margin-left: 20rem;
     position: relative;
+    
 
 }
 
@@ -100,9 +103,8 @@ nav {
 
 .burgers.active {
     position: absolute;
-    top: 50%; 
-    right: 20%; 
-    transform: translateY(-50%);
+    transform: translateY(-10%);
+    right: 25%;
     z-index: 10; 
     
 }
@@ -145,6 +147,77 @@ nav {
 
 
 .order-btn:hover {
-    background-color: #ddd;
+    background-color: #7c7c7c;
 }
+
+.specials-container {
+    display: grid;
+    grid-template-columns: repeat(8, 0.5fr);
+    grid-template-rows: repeat(2, 0.5fr);
+    gap: 0.5rem;
+    margin-top: 4rem;
+    
+
+    position: absolute;
+    transform: translateY(-5%);
+    right: 40%;
+    z-index: 10; 
+}
+
+
+h2 {
+
+    font-size: 60pt;
+    
+}
+
+.special-option {
+
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+
+}
+
+.specials-container label {
+    font-size: 32px; 
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.specials-container label:hover{
+    background-color: #494949;
+
+}
+.special-option:hover {
+    background-color: #ffffff;
+    
+}
+
+.back-button {
+    color: #000;
+    font-size: 36px;
+    margin-top: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.back-button:hover {
+    background-color: #7c7c7c;
+    transition: background-color 0.3s ease;
+}
+
+
 

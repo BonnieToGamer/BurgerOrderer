@@ -1,27 +1,43 @@
 document.querySelectorAll('.burgers').forEach(burger => {
+    //Lägger till klickad burgare och tar bort de andra från UI
     burger.addEventListener('click', function() {
-        // Remove 'active' class and remove "Order" button from other burgers
         document.querySelectorAll('.burgers').forEach(b => {
-            b.classList.remove('active');
-            const existingButton = b.querySelector('.order-btn');
-            if (existingButton) existingButton.remove(); // Remove any existing buttons
+            if (b !== this) {
+                b.style.display = 'none'; 
+            }
         });
 
-        // Add 'active' class to the clicked burger
+        //lägger till "active" klassen till .burgers
         this.classList.add('active');
+        
+        //lägger till specials UI
+        document.querySelector('.specials-container').style.display = 'grid';
+        
+        //Order Button
+        const newOrderButton = document.createElement('button');
+        newOrderButton.textContent = 'Order';
+        newOrderButton.classList.add('order-btn');
+        //Lägger till order button i UI
+        this.appendChild(newOrderButton);
 
-        // Create and add the "Order" button
-        const orderButton = document.createElement('button');
-        orderButton.textContent = 'Order';
-        orderButton.classList.add('order-btn');
+        newOrderButton.addEventListener('click', function() {
+            window.location.href = '/views/order'; 
+        });
 
-        // Append the button to the burger container
-        this.appendChild(orderButton);
+        //Data collection
+        newOrderButton.addEventListener('click', function() {
 
-        // Handle click event on the "Order" button
-        orderButton.addEventListener('click', function() {
-            // Redirect to another page (e.g., order.html)
-            window.location.href = '/views/order'; // Adjust the path as needed
+            const selectedBurger = {
+                name: burger.querySelector('.burger-name').textContent
+            };
+
+            const selectedSpecials = [];
+            document.querySelectorAll('.special-option').forEach(option => {
+                if (option.checked) {
+                    selectedSpecials.push(option.value); 
+                }
+            });
         });
     });
 });
+
