@@ -1,0 +1,13 @@
+<svg id="Website_Names" data-name="Website Names" xmlns="http://www.w3.org/2000/svg" width="2000" height="2000" viewBox="0 0 2000 2000">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 300px;
+        fill: #fff;
+        font-family: "Bad Boys";
+      }
+    </style>
+  </defs>
+  <text id="menu" class="cls-1" x="768.466" y="1110.48">menu</text>
+  <text id="Lorem_Ipsum" data-name="Lorem Ipsum" class="cls-1" x="-980.51" y="-155.922">Lorem Ipsum</text>
+</svg>

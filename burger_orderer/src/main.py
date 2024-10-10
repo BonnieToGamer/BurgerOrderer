@@ -2,6 +2,8 @@ from flask import Flask, jsonify, request
 import json
 import pymongo
 import os
+from views import views
+
 
 MONGODB_URL = os.getenv("MONGODB_URL")
 mongo_client = pymongo.MongoClient(MONGODB_URL)
@@ -11,6 +13,7 @@ burger_db = mongo_client["burger_db"]
 burger_collection = burger_db["burgers"]
 
 app = Flask(__name__)
+app.register_blueprint(views, url_prefix="/views")
 
 def burger_exists(burger_name):
     return burger_collection.count_documents({ 'name': burger_name }, limit = 1) != 0
