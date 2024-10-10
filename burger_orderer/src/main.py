@@ -27,15 +27,6 @@ for burger_name, burger_details in parsed_json.items():
     if not burger_exists(burger_name):
         burger_collection.insert_one(burger)
 
-
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
-
-@app.route("/hello")
-def test():
-    return "world"
-
 @app.route("/api/getBurgers")
 def get_burgers():
     burgers = []
