@@ -1,43 +1,50 @@
-document.querySelectorAll('.burgers').forEach(burger => {
-    //Lägger till klickad burgare och tar bort de andra från UI
-    burger.addEventListener('click', function() {
-        document.querySelectorAll('.burgers').forEach(b => {
-            if (b !== this) {
-                b.style.display = 'none'; 
-            }
-        });
+function createBurgerDiv(burgerName, burgerPrice) {
+    const burgerDiv = document.createElement('div');
+    burgerDiv.classList.add('burgers');
 
-        //lägger till "active" klassen till .burgers
-        this.classList.add('active');
-        
-        //lägger till specials UI
-        document.querySelector('.specials-container').style.display = 'grid';
-        
-        //Order Button
-        const newOrderButton = document.createElement('button');
-        newOrderButton.textContent = 'Order';
-        newOrderButton.classList.add('order-btn');
-        //Lägger till order button i UI
-        this.appendChild(newOrderButton);
+    const burgerLink = document.createElement('a');
+    burgerLink.href = '/order?burger=' + burgerName;
 
-        newOrderButton.addEventListener('click', function() {
-            window.location.href = '/views/order'; 
-        });
+    const burgerImage = document.createElement('img');
+    burgerImage.src = '../static/Burger1.png'; // Placeholder image
+    burgerImage.classList.add('burger-image');
+    burgerImage.alt = burgerName;
 
-        //Data collection
-        newOrderButton.addEventListener('click', function() {
+    burgerLink.appendChild(burgerImage);
 
-            const selectedBurger = {
-                name: burger.querySelector('.burger-name').textContent
-            };
+    const burgerInfoDiv = document.createElement('div');
+    burgerInfoDiv.classList.add('burger-info');
 
-            const selectedSpecials = [];
-            document.querySelectorAll('.special-option').forEach(option => {
-                if (option.checked) {
-                    selectedSpecials.push(option.value); 
-                }
+    const burgerNameH3 = document.createElement('h3');
+    burgerNameH3.classList.add('burger-name');
+    burgerNameH3.textContent = burgerName;
+
+    const burgerPriceDiv = document.createElement('div');
+    burgerPriceDiv.classList.add('burger-price');
+    burgerPriceDiv.textContent = burgerPrice;
+
+    burgerInfoDiv.appendChild(burgerNameH3);
+    burgerInfoDiv.appendChild(burgerPriceDiv);
+
+    burgerDiv.appendChild(burgerLink);
+    burgerDiv.appendChild(burgerInfoDiv);
+
+    return burgerDiv;
+}
+
+function loadBurgers() {
+    fetch('/api/getBurgers')
+        .then(response => response.json())
+        .then(burgers => {
+            const burgerContainer = document.getElementById('burgers-container');
+
+            burgers.forEach(burger => {
+                const { name, price } = burger;
+                const burgerDiv = createBurgerDiv(name, price);
+                burgerContainer.appendChild(burgerDiv); // Append each burger to the container
             });
-        });
-    });
-});
+        })
+        .catch(error => console.error('Error fetching burgers:', error));
+}
 
+document.addEventListener('DOMContentLoaded', loadBurgers);

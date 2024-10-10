@@ -18,6 +18,7 @@ services:
       - client-kitchen-network
     environment:
       - MONGODB_URL=mongodb://mongodb:27017/
+      - KITCHEN_URL=http://kitchen_view:8090/
 
   kitchen_view:
     build:
@@ -30,8 +31,6 @@ services:
       - "8090:8090"
     volumes:
       - ./kitchen_view/src:/app
-    environment:
-      - MONGODB_URL=mongodb://mongodb:27017/
     networks:
       - client-kitchen-network
 
