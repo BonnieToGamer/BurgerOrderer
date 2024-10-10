@@ -12,9 +12,12 @@ services:
       - ./burger_orderer/src:/app
     depends_on:
       - kitchen_view
+      - mongodb
     networks:
       - database-network
       - client-kitchen-network
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017/
 
   kitchen_view:
     build:
@@ -29,8 +32,6 @@ services:
       - ./kitchen_view/src:/app
     environment:
       - MONGODB_URL=mongodb://mongodb:27017/
-    depends_on:
-      - mongodb
     networks:
       - client-kitchen-network
 
@@ -49,6 +50,8 @@ services:
       - database-network
     environment:
       - ME_CONFIG_MONGODB_SERVER=mongodb
+    depends_on:
+      - mongodb
 
 volumes:
   dbdata:
