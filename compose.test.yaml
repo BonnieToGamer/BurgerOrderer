@@ -5,14 +5,17 @@ services:
       dockerfile: Dockerfile
       args:
         SOURCE_DIR: ./burger_orderer
-    command: ["pytest", "-v", "--tb=short"]
+    command: ["pytest", "-vv", "--tb=long"]
     volumes:
       - ./burger_orderer/src:/app
-      - ./burger_orderer/tests:/app/tests
     environment:
-      - FLASK_ENV=testing
       - MONGODB_URL=mongodb://mongodb:27017/
       - KITCHEN_URL=http://kitchen_view:8090/
+      - FLASK_ENV=testing
+      - PYTHONPATH=.
+    depends_on:
+      - mongodb
+      - kitchen_view
       
   kitchen_view:
     build:
@@ -20,12 +23,14 @@ services:
       dockerfile: Dockerfile
       args:
         SOURCE_DIR: ./kitchen_view
-    command: ["pytest"]
+    command: ["pytest", "-vv", "--tb=long"]
+    ports:
+      - "8090:8090"
     volumes:
       - ./kitchen_view/src:/app
-      - ./kitchen_view/tests:/app/tests
     environment:
       - FLASK_ENV=testing
+      - PYTHONPATH=.
 
   mongodb:
     image: mongo:8.0.0
@@ -34,3 +39,9 @@ services:
 
 volumes:
   dbdata:
+
+networks:
+  database-network:
+    driver: bridge
+  client-kitchen-network:
+    driver: bridge

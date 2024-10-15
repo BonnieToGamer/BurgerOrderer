@@ -10,7 +10,7 @@ app = Flask(__name__)
 # why is this just not in the language?
 class Order(TypedDict):
     burger: str
-    specials: list [str]
+    specials: list[str]
 
 
 def print_order(order: Order):
@@ -25,8 +25,20 @@ def handle_new_order():
     try:
         order = request.get_json(force=True)["order"]
         order = Order(order)
+
     except:
         return "error", 400
+
+    if  "burger" not in order or \
+        "specials" not in order or \
+        not isinstance(order["burger"], str) or \
+        not isinstance(order["specials"], list) or \
+        order["burger"] == "":
+        return "error", 400
+
+    for special in order["specials"]:
+        if not isinstance(special, str):
+            return "error", 400
 
     print_order(order)
     return "success", 200

@@ -1,4 +1,4 @@
-FROM python:3.12.6-alpine as compiler
+FROM python:3.12.6-alpine AS compiler
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1
