@@ -7,6 +7,7 @@ Anything and everything should be planned here.
 1. [Websocket format](#ws)
 2. [Api structure](#api)
 3. [User interface](#ui)
+4. [Testing and debugging](#testing)
 
 ### Websocket format <a name="ws"></a>
 This is how the websocket messages will be formatted. This will only make sense if you also read [Api structure](#api). In the title web sockets will be denoted by the start `WebSocket`. It will then have the name of the operation e.g `newOrder`. This title is not a URL like the the rest of the API but rather a part of the message. We therefore have a custom `Packet` which defines the `name` where the name of the operation is stored.. Packets will look like the following:
@@ -51,9 +52,9 @@ class Packet:
 
 ##### Responses
 
-> | http code     | content-type                      | response                                                            |
-> |---------------|-----------------------------------|---------------------------------------------------------------------|
-> | `200`         | `text/plain;charset=UTF-8`        | `index.html`                                |
+> | http code | content-type               | response     |
+> |-----------|----------------------------|--------------|
+> | `200`     | `text/plain;charset=UTF-8` | `index.html` |
 
 </details>
 
@@ -66,9 +67,9 @@ class Packet:
 
 ##### Responses
 
-> | http code     | content-type                      | response                                                            |
-> |---------------|-----------------------------------|---------------------------------------------------------------------|
-> | `200`         | `application/json`        | `{"burgers": []}`                               |
+> | http code | content-type       | response          |
+> |-----------|--------------------|-------------------|
+> | `200`     | `application/json` | `{"burgers": []}` |
 
 </details>
 
@@ -81,10 +82,10 @@ class Packet:
 
 ##### Responses
 
-> | http code     | content-type                      | response                                                            |
-> |---------------|-----------------------------------|---------------------------------------------------------------------|
-> | `200`         | `application/json`        | `{"specials": []}`                               |
-> | `404`         | `application/json` | `None` |
+> | http code | content-type       | response           |
+> |-----------|--------------------|--------------------|
+> | `200`     | `application/json` | `{"specials": []}` |
+> | `404`     | `application/json` | `None`             |
 
 </details>
 
@@ -94,16 +95,17 @@ class Packet:
 
 ##### Parameters
 
-> | name      |  type     | data type               | description   | Example                                                      |
-> |-----------|-----------|-------------------------|-------------------------------------|---------------------------------|
-> | Order      |  required | object (JSON)   | The customers order in JSON format  | `{"order": {"burgerName": "string", specials: []}}` |
+> | name  | type     | data type     | description                        | Example                                             |
+> |-------|----------|---------------|------------------------------------|-----------------------------------------------------|
+> | Order | required | object (JSON) | The customers order in JSON format | `{"order": {"burgerName": "string", specials: []}}` |
 
 ##### Responses
 
-> | http code     | content-type                      | response                                                            |
-> |---------------|-----------------------------------|---------------------------------------------------------------------|
-> | `200`         | `application/json`        | `{"specials": []}`                               |
-> | `404`         | `application/json` | `None` |
+> | http code | content-type       | response           |
+> |-----------|--------------------|--------------------|
+> | `200`     | `application/json` | `{"specials": []}` |
+> | `404`     | `application/json` | `None`             |
+
 
 </details>
 
@@ -114,10 +116,47 @@ class Packet:
 
 ##### Received Message (Server -> Client)
 
-> | name      |  type     | data type               | description   | Example                                                      |
-> |-----------|-----------|-------------------------|-------------------------------------|---------------------------------|
-> | order     |  required | application/json                  | The order that's gonna be made by the kitchen | `{"burger": "string", "specials": []}` |
+> | name  | type     | data type        | description                                   | Example                                |
+> |-------|----------|------------------|-----------------------------------------------|----------------------------------------|
+> | order | required | application/json | The order that's gonna be made by the kitchen | `{"burger": "string", "specials": []}` |
+
 </details>
 
 ### User interface <a name="ui"></a>
 TODO
+
+### Testing and debugging <a name="testing"></a>
+The testing will be done with the pytest library. It is a popular choice for unit testing in python. It also has built in functionality to work with the flask library. Which we use for out web server(s).
+
+#### Things to test:
+
+Kitchen_view:
+---
+There is only one endpoint inside of kitchen_view which is the <code><b>/newOrder</b></code> endpoint. Inside it we will test the following:
+* A successful order.
+* No data.
+* Broken burger entry.
+* Malformed burger data.
+* Empty burger data.
+* Broken special entry.
+* Malformed special entry.
+* Malformed special data.
+  
+This is a wide range of tests which tests multiple failure points. We would also like to point out that we did think about limiting the size of requests but deemed it unnecessary since it can only be called from inside the local network.
+
+Burger_orderer:
+---
+There is quite a few endpoints on burger_orderer and we shall breakdown every plan for every endpoint:
+
+* <code>GET</code> <code><b>/api/getBurgers</b></code>
+  * A get request to see if the endpoint works and check if a default burger is there.
+* <code>GET</code> <code><b>/api/getSpecials</b></code>
+  * Check if specials exists for default burger.
+  * No burger provided.
+  * No burger name provided.
+  * Non existent burger name.
+* <code>POST</code> <code><b>/api/newOrder</b></code>
+  * Valid order
+  * No JSON data
+  * Text data
+  * Malformed JSON data
