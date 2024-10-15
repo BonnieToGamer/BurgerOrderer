@@ -1,0 +1,36 @@
+services:
+  burger_orderer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SOURCE_DIR: ./burger_orderer
+    command: ["pytest", "-v", "--tb=short"]
+    volumes:
+      - ./burger_orderer/src:/app
+      - ./burger_orderer/tests:/app/tests
+    environment:
+      - FLASK_ENV=testing
+      - MONGODB_URL=mongodb://mongodb:27017/
+      - KITCHEN_URL=http://kitchen_view:8090/
+      
+  kitchen_view:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SOURCE_DIR: ./kitchen_view
+    command: ["pytest"]
+    volumes:
+      - ./kitchen_view/src:/app
+      - ./kitchen_view/tests:/app/tests
+    environment:
+      - FLASK_ENV=testing
+
+  mongodb:
+    image: mongo:8.0.0
+    volumes:
+      - dbdata:/data/db
+
+volumes:
+  dbdata:
