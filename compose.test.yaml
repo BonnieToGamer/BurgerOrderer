@@ -16,6 +16,9 @@ services:
     depends_on:
       - mongodb
       - kitchen_view
+    networks:
+      - database-network
+      - client-kitchen-network
       
   kitchen_view:
     build:
@@ -24,6 +27,7 @@ services:
       args:
         SOURCE_DIR: ./kitchen_view
     command: ["pytest", "-vv", "--tb=long"]
+    container_name: kitchen_view_container
     ports:
       - "8090:8090"
     volumes:
@@ -31,11 +35,15 @@ services:
     environment:
       - FLASK_ENV=testing
       - PYTHONPATH=.
+    networks:
+      - client-kitchen-network
 
   mongodb:
     image: mongo:8.0.0
     volumes:
       - dbdata:/data/db
+    networks:
+      - database-network
 
 volumes:
   dbdata:

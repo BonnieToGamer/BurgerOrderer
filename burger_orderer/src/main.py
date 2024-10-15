@@ -48,7 +48,7 @@ def get_specials():
         for burger in burger_collection.find({"name": burger_name}, limit = 1):
             return jsonify(burger["specials"])
     else:
-        return jsonify({"error": "burger not found"})
+        return jsonify({"error": "burger not found"}), 400
 
 @app.route("/api/newOrder", methods=["POST"])
 def new_order():
