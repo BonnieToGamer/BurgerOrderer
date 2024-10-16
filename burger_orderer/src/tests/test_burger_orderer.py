@@ -39,5 +39,15 @@ def test_get_specials_non_existent_burger(client):
 
 def test_new_order_valid_data(client):
     response = client.post('/api/newOrder', json={"order": {"burger": "Cheeseburger", "specials": []}})
-    assert response.data.decode('utf-8') == "success"
+    assert response.get_json() == {"response": "success"}
     assert response.status_code == 200
+
+def test_new_order_no_data(client):
+    response = client.post('/api/newOrder')
+    assert "error" in response.get_json()
+    assert response.status_code == 400
+
+def test_new_order_malformed_order(client):
+    response = client.post('/api/newOrder', json={"order": {"burger": "test burger", "specials": [123, None]}})
+    assert response.get_json() == {"response": "error"}
+    assert response.status_code == 400

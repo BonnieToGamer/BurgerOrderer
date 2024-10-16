@@ -158,5 +158,10 @@ There is quite a few endpoints on burger_orderer and we shall breakdown every pl
 * <code>POST</code> <code><b>/api/newOrder</b></code>
   * Valid order
   * No JSON data
-  * Text data
   * Malformed JSON data
+  
+
+#### Debugging
+For debugging the two flask servers we use the free version of Postman. This will allow us to probe and test every api endpoint with any and all data. For general debugging inside of python we use breakpoints and debugging statements such as <code>print()</code>.
+
+To debug the MongoDB server we will use a docker container from docker hub called Mongo-Express. It provides a web interface for the MongoDB instance so we can check if for example data is getting inserted correctly. This can be done in python as well, but comes with some limitations such as having to run the program every time.
