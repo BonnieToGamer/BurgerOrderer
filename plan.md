@@ -10,6 +10,7 @@ Anything and everything should be planned here.
 1. [User interface](#ui)
 1. [Testing and debugging](#testing)
 1. [Database structure](#db)
+1. [Kitchen view structure](#kvs)
 
 ### Division of work <a name="work"></a>
 We will divide the work as follows:
@@ -191,4 +192,14 @@ The database will have a single collection as it is called in MongoDB. A collect
         'Remove onions'
     ]
 }
+```
+
+### Kitchen view structure <a name="kvs"></a>
+The kitchen view will print to std output. It will print in the following format:
+```
+New order:
+------------------------------
+Type of burger:    Cheeseburger
+Special requests:  Add pickles, remove cheese
+------------------------------
 ```
