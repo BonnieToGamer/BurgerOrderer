@@ -4,10 +4,19 @@ This is the plan for the project.
 Anything and everything should be planned here.
 
 ## Table of contents
+1. [Division of work](#work)
 1. [Websocket format](#ws)
-2. [Api structure](#api)
-3. [User interface](#ui)
-4. [Testing and debugging](#testing)
+1. [Api structure](#api)
+1. [User interface](#ui)
+1. [Testing and debugging](#testing)
+
+### Division of work <a name="work"></a>
+We will divide the work as follows:
+* Mikko: Frontend and documentation.
+* Leo: BurgerOrderer and documentation.
+* Filip: KitchenView, documentation and docker.
+
+We decided this in the beginning of the project but forgot to write it down.
 
 ### Websocket format <a name="ws"></a>
 This is how the websocket messages will be formatted. This will only make sense if you also read [Api structure](#api). In the title web sockets will be denoted by the start `WebSocket`. It will then have the name of the operation e.g `newOrder`. This title is not a URL like the the rest of the API but rather a part of the message. We therefore have a custom `Packet` which defines the `name` where the name of the operation is stored.. Packets will look like the following:
