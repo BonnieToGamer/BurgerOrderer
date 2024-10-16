@@ -22,10 +22,10 @@ def print_order(order: Order):
     The function prints the burger type and special requests in a user-friendly format.
     """
     
-    print("Ny beställning:")
+    print("New order::")
     print("-" * 30)
-    print(f"{'Typ av Burger:':<20} {order['burger'].capitalize()}")
-    print(f"{'Särskilda önskemål:':<20} {', '.join(order['specials']).capitalize() if order['specials'] else 'Inga särskilda önskemål.'}")
+    print(f"{'Type of burger:':<20} {order['burger'].capitalize()}")
+    print(f"{'Special requests:':<20} {', '.join(order['specials']).capitalize() if order['specials'] else 'Inga särskilda önskemål.'}")
     print("-" * 30 + "\n")
 
 @app.route("/newOrder", methods=["POST"])
