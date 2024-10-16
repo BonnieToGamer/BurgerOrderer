@@ -1,40 +1,41 @@
 services:
-  burger_orderer:
+  burger_orderer_test:
     build:
       context: .
       dockerfile: Dockerfile
       args:
         SOURCE_DIR: ./burger_orderer
-    container_name: burger_orderer_container
-    ports: 
-      - "8080:8080"
+    command: ["pytest", "-vv", "--tb=long"]
     volumes:
       - ./burger_orderer/src:/app
-    depends_on:
-      - kitchen_view
-      - mongodb
-    networks:
-      - database-network
-      - client-kitchen-network
+    container_name: burger_orderer_test_container
     environment:
       - MONGODB_URL=mongodb://mongodb:27017/
       - KITCHEN_URL=http://kitchen_view:8090/
-    stop_grace_period: 1s
-
-  kitchen_view:
+      - FLASK_ENV=testing
+      - PYTHONPATH=.
+    depends_on:
+      - mongodb
+      - kitchen_view
+    networks:
+      - database-network
+      - client-kitchen-network
+      
+  kitchen_view_test:
     build:
       context: .
       dockerfile: Dockerfile
       args:
         SOURCE_DIR: ./kitchen_view
-    container_name: kitchen_view_container
-    ports:
-      - "8090:8090"
+    command: ["pytest", "-vv", "--tb=long"]
+    container_name: kitchen_view_test_container
     volumes:
       - ./kitchen_view/src:/app
+    environment:
+      - FLASK_ENV=testing
+      - PYTHONPATH=.
     networks:
       - client-kitchen-network
-    stop_grace_period: 1s
 
   mongodb:
     image: mongo:8.0.0
@@ -42,17 +43,6 @@ services:
       - dbdata:/data/db
     networks:
       - database-network
-
-  mongo-express:
-    image: mongo-express:1.0.2-20-alpine3.19
-    ports:
-      - "8081:8081"
-    networks:
-      - database-network
-    environment:
-      - ME_CONFIG_MONGODB_SERVER=mongodb
-    depends_on:
-      - mongodb
 
 volumes:
   dbdata:

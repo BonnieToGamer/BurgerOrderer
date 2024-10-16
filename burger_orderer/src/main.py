@@ -48,10 +48,13 @@ def get_specials():
         for burger in burger_collection.find({"name": burger_name}, limit = 1):
             return jsonify(burger["specials"])
     else:
-        return jsonify({"error": "burger not found"})
+        return jsonify({"error": "burger not found"}), 400
 
 @app.route("/api/newOrder", methods=["POST"])
 def new_order():
+    if request.is_json == False:
+        return jsonify({'error': 'Failed to send request to kitchen', 'details': "No json data provided"}), 400
+
     order_data = request.get_json()
 
     target_url = KITCHEN_URL + 'newOrder'
@@ -60,9 +63,10 @@ def new_order():
 
     try:
         response = requests.post(target_url, json=order_data)
-        return jsonify(response.text), response.status_code
+        return jsonify({"response": response.text}), response.status_code
     
     except requests.exceptions.RequestException as e:
+        print("there was an error")
         return jsonify({'error': 'Failed to send request to kitchen', 'details': str(e)}), 500
 
 if __name__ == "__main__":
