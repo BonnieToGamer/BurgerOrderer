@@ -19,6 +19,7 @@ services:
     environment:
       - MONGODB_URL=mongodb://mongodb:27017/
       - KITCHEN_URL=http://kitchen_view:8090/
+    stop_grace_period: 1s
 
   kitchen_view:
     build:
@@ -33,6 +34,7 @@ services:
       - ./kitchen_view/src:/app
     networks:
       - client-kitchen-network
+    stop_grace_period: 1s
 
   mongodb:
     image: mongo:8.0.0

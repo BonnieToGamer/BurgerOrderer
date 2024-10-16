@@ -1,5 +1,5 @@
 services:
-  burger_orderer:
+  burger_orderer_test:
     build:
       context: .
       dockerfile: Dockerfile
@@ -8,6 +8,7 @@ services:
     command: ["pytest", "-vv", "--tb=long"]
     volumes:
       - ./burger_orderer/src:/app
+    container_name: burger_orderer_test_container
     environment:
       - MONGODB_URL=mongodb://mongodb:27017/
       - KITCHEN_URL=http://kitchen_view:8090/
@@ -20,16 +21,14 @@ services:
       - database-network
       - client-kitchen-network
       
-  kitchen_view:
+  kitchen_view_test:
     build:
       context: .
       dockerfile: Dockerfile
       args:
         SOURCE_DIR: ./kitchen_view
     command: ["pytest", "-vv", "--tb=long"]
-    container_name: kitchen_view_container
-    ports:
-      - "8090:8090"
+    container_name: kitchen_view_test_container
     volumes:
       - ./kitchen_view/src:/app
     environment:
