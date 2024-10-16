@@ -9,6 +9,7 @@ Anything and everything should be planned here.
 1. [Api structure](#api)
 1. [User interface](#ui)
 1. [Testing and debugging](#testing)
+1. [Database structure](#db)
 
 ### Division of work <a name="work"></a>
 We will divide the work as follows:
@@ -132,7 +133,7 @@ class Packet:
 </details>
 
 ### User interface <a name="ui"></a>
-TODO
+You can read it [here](ui-plan.md)
 
 ### Testing and debugging <a name="testing"></a>
 The testing will be done with the pytest library. It is a popular choice for unit testing in python. It also has built in functionality to work with the flask library. Which we use for out web server(s).
@@ -174,3 +175,20 @@ There is quite a few endpoints on burger_orderer and we shall breakdown every pl
 For debugging the two flask servers we use the free version of Postman. This will allow us to probe and test every api endpoint with any and all data. For general debugging inside of python we use breakpoints and debugging statements such as <code>print()</code>.
 
 To debug the MongoDB server we will use a docker container from docker hub called Mongo-Express. It provides a web interface for the MongoDB instance so we can check if for example data is getting inserted correctly. This can be done in python as well, but comes with some limitations such as having to run the program every time.
+
+### Database structure <a name="db"></a>
+The database will have a single collection as it is called in MongoDB. A collection contains documents and documents contain data. We will have a collection of burgers. The documents will contain information of the burgers on the menu. Such as name, price and special customization items. A document looks like this:
+```json
+{
+    _id: ObjectId('670eb591b855155b1befbd18'), // a unique id for each document. this is a mongodb feature.
+    name: 'Cheeseburger',
+    price: '2000kr',
+    specials: [
+        'Add pickles',
+        'Add tomatoes',
+        'Remove cheese',
+        'Remove ketchup',
+        'Remove onions'
+    ]
+}
+```
