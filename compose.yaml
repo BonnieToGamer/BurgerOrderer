@@ -2,14 +2,12 @@ services:
   burger_orderer:
     build:
       context: .
-      dockerfile: Dockerfile
-      args:
-        SOURCE_DIR: ./burger_orderer
+      dockerfile: ./Containers/burger_orderer/Dockerfile
     container_name: burger_orderer_container
     ports: 
       - "8080:8080"
     volumes:
-      - ./burger_orderer/src:/app
+      - ./Containers/burger_orderer/src:/app
     depends_on:
       - kitchen_view
       - mongodb
@@ -24,14 +22,12 @@ services:
   kitchen_view:
     build:
       context: .
-      dockerfile: Dockerfile
-      args:
-        SOURCE_DIR: ./kitchen_view
+      dockerfile: ./Containers/kitchen_view/Dockerfile
     container_name: kitchen_view_container
     ports:
       - "8090:8090"
     volumes:
-      - ./kitchen_view/src:/app
+      - ./Containers/kitchen_view/src:/app
     networks:
       - client-kitchen-network
     stop_grace_period: 1s

@@ -2,12 +2,12 @@ services:
   burger_orderer_test:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./Containers/burger_orderer/Dockerfile
       args:
         SOURCE_DIR: ./burger_orderer
     command: ["pytest", "-vv", "--tb=long"]
     volumes:
-      - ./burger_orderer/src:/app
+      - ./Containers/burger_orderer/src:/app
     container_name: burger_orderer_test_container
     environment:
       - MONGODB_URL=mongodb://mongodb:27017/
@@ -24,13 +24,13 @@ services:
   kitchen_view_test:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./Containers/kitchen_view/Dockerfile
       args:
         SOURCE_DIR: ./kitchen_view
     command: ["pytest", "-vv", "--tb=long"]
     container_name: kitchen_view_test_container
     volumes:
-      - ./kitchen_view/src:/app
+      - ./Containers/kitchen_view/src:/app
     environment:
       - FLASK_ENV=testing
       - PYTHONPATH=.

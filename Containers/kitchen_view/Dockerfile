@@ -11,11 +11,10 @@ WORKDIR /app
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-ARG SOURCE_DIR
-COPY $SOURCE_DIR/requirements.txt /app
+COPY Containers/kitchen_view/requirements.txt /app
 RUN pip install --no-cache-dir -r requirements.txt
 
-FROM python:3.12.6-alpine as runner
+FROM python:3.12.6-alpine AS runner
 
 WORKDIR /app
 COPY --from=compiler /opt/venv /opt/venv
