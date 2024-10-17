@@ -10,3 +10,6 @@ Today I commited all my changes to my branch so that Filip could start merging t
 
 ## Date: 2024-10-07
 Today me and Filip (mostly Filip) implemented Mongodb to the project. 
+
+## Date: 2024-10-16
+Today I wrote docstrings for the functions in our program.
