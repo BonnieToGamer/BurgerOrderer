@@ -8,7 +8,7 @@
             "name": "Python Debugger: Application",
             "type": "debugpy",
             "request": "launch",
-            "program": "./burger_orderer/src/main.py",
+            "program": "./Containers/kitchen_view/src/main.py",
             "console": "integratedTerminal",
             "autoReload": {
                 "enable": false,

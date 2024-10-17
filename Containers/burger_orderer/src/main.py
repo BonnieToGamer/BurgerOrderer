@@ -21,7 +21,7 @@ def burger_exists(burger_name):
     """
     Gets the name of a burger and checks if it exists in the database.
 
-    Args:
+    Parameters:
         burger_name: The name of a burger.
 
     Returns: A boolean that tells us whether or not the burger exists.
