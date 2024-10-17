@@ -17,7 +17,7 @@ One thing with the sketch that I did not take in to account when creating it, wa
 ## Week 3
 After getting the feedback about the layout design, I started trying to create the UI with HTML, CSS and JavaScript.
 I made a new folder and created multiple files, two python files with flask that created the local web application so I could be able to see the UI.
-For the UI design and functionality I created a HTML file and a CSS file. I added all the images that I used in the sketch to the project and started out trying to implement them into the web application using HTML and CSS. I looked up how to add images and text using HTML 
+For the UI design and functionality I created a HTML file and a CSS file. I added all the images that I used in the sketch to the project and started out trying to implement them into the web application using HTML and CSS. I looked up how to add images and text to the UI using HTML. 
 
 ## Week 4
 I created the base UI layout. The layout consists of the logo, navigation bar, the burgers and the background. I implemented these with HTML and CSS. 
@@ -33,7 +33,23 @@ JavaScript is also used to record when a burger was selected and what special re
 Finalized the UI design and functionality and pushed it to the remote branch "ui-design"
 
 ## Week 6
-I added docstrings that explains the parameters and the functionality of the methods in kitchen_view
+Now that the projects branches has been merged into the main file, I started to use docker to be sure that the I had the requirements needed to run the project correctly. 
+I added docstrings that explains the parameters and the functionality of the methods in kitchen_view. 
+After documenting the functionality of the methods in kitchen_view I started a debug session. 
+
+### The Debug session
+I chose to check what happens if I put a breakpoint in the get_specials method from the main.py file in the burger_orderer container. The variable that the breakpoint was set on was "burger_name = request.args.get("burger", default = "", type = str)" this made it so that when a burger was clicked, the burger name does not get sent to the kitchen_view and prevents any specials to appear for selection, this happens because the breakpoint makes the debugger pause execution right before the value of the 'burger' parameter gets extracted from the request. The breakpoint makes it possible to view the incoming request object and allows me to see if the correct value is assigned to the burger_name variable.
+To test if the correct name was assigned to the burger_name variable I looked under the "Globals" variables tab, went down to the request tab and then to the args tab. Under the args tab you can see that the correct value has been passed as the 'burger' parameter which will result in assigning the correct value to burger_name. I confirmed this by using the step over button, basically stepping to the next line of code, allowing the burger_name value to get assigned with the correct value. You can see this by checking the "Locals" tab and viewing the variable burger_name = 'Cheeseburger'.
+I also checked what happens if you change the value of the burger_name variable to a different valid name. I changed burger_name = 'Cheeseburger' to burger_name = 'Burger 20'. By doing this the specials for the Burger 20 gets retrieved instead of the Cheesburger specials. This does not change the burger selection, only the specials. Placing the order with the different specials selections does not cause any errors. 
+
+The other buttons that can be used for debugging are continue, step into and step out. The continue button does at it says and runs the code after being paused at the breakpoint. The step into button can be used to step into functions and methods that are on the line and allows debugging inside the function or method. The step out is used to step out of a function or a method and runs the rest of the code inside of the function or method and pauses once it returns to the place it was called from.
+
+### Conclusions from the debugging session
+Carrying out the debugging session was a learning experience and was a bit complicated to understand in the beginning. But once I tested out the different buttons and setting different breakpoints in the code, it was less complicated than what I assumed. The things that was hard for me to understand in the beginning was the breakpoints, I did not get if the breakpoint completely "removed" the line of code it was set on or if the line of code it was set on was the last line it ran. But after using it I understand that it is kind of a middle ground to that, it stops the execution on that line and makes it possible to view what the different variables values are and how the program state in that moment looks like, allowing you to have a step by step approach to debugging.  
+I found this very useful as I can see how this could be used for when an error occur, instead of using prints to check every variable etc.
+
+ 
+
 
 
 
