@@ -9,10 +9,11 @@ Filip Holmgrens logbook.
 <code>git push</code> pushes the local commits to the origin </br>
 <code>git merge</code> merges two branches together </br>
 <code>git status</code> get's the current status of the git project
-
+<code>git switch</code> create and or switch to new branch </br>
+<code>git branch</code> list all git branches </br>
 
 ## 23/09/2023
-Docker, a tool most developers use. Which I have never used. So this was a first for me. I prefer using the CLI, because GUIs abstract a lot of functionality away. This was not the greatest choice since almost every user uses the Docker desktop application. So I started watching a bunch of tutorials and learned some basic commands like `docker build` and `docker run`. I also learnt about tagging. In the end I built a two step docker file. The first "compiles" the code. I use the term compiler loosely since it technically is an installer but I digress. The second step runs the code and that's about it. It was definitely an interesting day to say the least. Git commands used <code>git fetch</code> <code>git pull</code> <code>git add</code> <code>git commit</code> <code>git push</code>
+Docker, a tool most developers use. Which I have never used. So this was a first for me. I prefer using the CLI, because GUIs abstract a lot of functionality away. This was not the greatest choice since almost every user uses the Docker desktop application. So I started watching a bunch of tutorials and learned some basic commands like `docker build` and `docker run`. I also learnt about tagging. In the end I built a two step docker file. The first "compiles" the code. I use the term compiler loosely since it technically is an installer but I digress. The second step runs the code and that's about it. It was definitely an interesting day to say the least. Git commands used <code>git fetch</code> <code>git pull</code> <code>git add</code> <code>git commit</code> <code>git push</code> <code>git branch</code><code>git switch</code>
 
 ## 24/09/24
 Today I managed to set up a dev container today with vscode. It was easier than I thought. I also set up a basic flask server just to see if the port forwarding and python installation worked and surprisingly both worked. Hurray! I also switched from using the normal python docker file from docker hub to the `-alpine` version. This trimmed down the file size by almost a 100Mb which is nice. Git commands used <code>git fetch</code> <code>git pull</code> <code>git add</code> <code>git commit</code> <code>git push</code>
