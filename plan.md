@@ -5,12 +5,12 @@ Anything and everything should be planned here.
 
 ## Table of contents
 1. [Division of work](#work)
-1. [Websocket format](#ws)
-1. [Api structure](#api)
-1. [User interface](#ui)
-1. [Testing and debugging](#testing)
-1. [Database structure](#db)
-1. [Kitchen view structure](#kvs)
+2. [Websocket format](#ws)
+3. [Api structure](#api)
+4. [User interface](#ui)
+5. [Testing and debugging](#testing)
+6. [Database structure](#db)
+7. [Kitchen view structure](#kvs)
 
 ### Division of work <a name="work"></a>
 We will divide the work as follows:
