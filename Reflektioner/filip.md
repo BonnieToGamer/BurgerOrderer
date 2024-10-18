@@ -35,3 +35,18 @@ Today I started work on the unit tests. I sent the rest of the group to write do
 
 ## 16/10/24
 I finished all the unit tests that we planned for. I also set up a Makefile for easier usage of the project. Git commands used <code>git fetch</code> <code>git pull</code> <code>git add</code> <code>git commit</code> <code>git push</code> <code>git merge</code> 
+
+## 14/10/24
+Debug session:
+1. I choose to test the get_specials() method.
+2. I find the file in Containers/burger_orderer/main.py and set my breakpoints on line 65 (at the time of writing).
+3. The main buttons when debugging are as follows:
+    * Continue: This continues executing the program until a breakpoint is hit.
+    * Step over: This goes to next line in the same source file. If that isn't possible it steps out of the function.
+    * Step into: If the current line calls a function, it goes into that function and stops at the first line.
+    * Step out: This steps out of the current function.
+    * Stop: Stops the program out right and quits debugging.
+    * Restart: Restarts the program and debugging session.
+    * Pause: Pauses the program at whichever line it is currently at.
+4. I can inspect a variable in VSCode by simply hovering over it when paused at a breakpoint that has access to that variables scope, e.g. same function. But I can also look in the inspection menu to see all local scope variables and global scope variables. In this case when breaking on line 64 which is a variable declaration the variable `burger_name` will get the value of the URL parameter `burger`. In my case it was "Cheeseburger". I can also set up the variable to break on change, simply by right clicking on the variable in the inspector and selection "break on value change".
+5. By breaking halfway through a GET request the client would simply not get a response from the server. This would break the client UI, while this isn't intended it is programmed that way. I repeated the request multiple time to tweak certain things during runtime, e.g. I changed the variable burger_name before the database request so that I got a different burger than I requested for, it was very easy to do so and I had no problems during my debugging session. Debugging is an extremely useful tool. It has helped me in the past fix so many problems. It is very helpful to see what values variables have and change them at runtime at will.
