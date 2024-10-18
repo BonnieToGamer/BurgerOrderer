@@ -17,12 +17,12 @@ One thing with the sketch that I did not take in to account when creating it, wa
 ## Week 3
 After getting the feedback about the layout design, I started trying to create the UI with HTML, CSS and JavaScript.
 I made a new folder and created multiple files, two python files with flask that created the local web application so I could be able to see the UI.
-For the UI design and functionality I created a HTML file and a CSS file. I added all the images that I used in the sketch to the project and started out trying to implement them into the web application using HTML and CSS. I looked up how to add images and text to the UI using HTML. 
+For the UI design and functionality I created a HTML file and a CSS file. I added all the images that I used in the sketch to the project and started out trying to implement them into the web application using HTML and CSS. I looked up how to add images and text to the UI using HTML and CSS. 
 
 ## Week 4
 I created the base UI layout. The layout consists of the logo, navigation bar, the burgers and the background. I implemented these with HTML and CSS. 
 I did not have any prior experience with these programming languages and had to search the web for tutorials to be able to learn how to use them.
-One of the few inconveniences I stumbled upon was the creation of the grid layout. The burger layout I had planned on using was a bit too complicated to create and decided to use a more simple layout for the burgers.
+One of the few inconveniences I stumbled upon was the creation of the grid layout. The burger layout I had planned on using was a bit too complicated to create and decided to use a more simple layout for the burgers that would be more flexible when the branches merge, making it possible to add more burgers without breaking the UI.
 
 ## Week 5
 I implemented burger selection for the UI, so when a burger is clicked it becomes bigger and gets moved to the right side of the screen. I used JavaScript and CSS to implement the movement and action that occurs when a burger is clicked. 
@@ -33,9 +33,9 @@ JavaScript is also used to record when a burger was selected and what special re
 Finalized the UI design and functionality and pushed it to the remote branch "ui-design"
 
 ## Week 6
-Now that the projects branches has been merged into the main file, I started to use docker to be sure that the I had the requirements needed to run the project correctly. 
+Now that the projects branches has been merged into the main branch, I started to use docker to be sure that the I had the requirements needed to run the project correctly. A minor change was made to the specials selection screen when the branches merged into the main branch, the change was that when a burger was clicked the specials shows up but without the burger image, this does not affect the functionality, only the visuals.
 I added docstrings that explains the parameters and the functionality of the methods in kitchen_view. 
-After documenting the functionality of the methods in kitchen_view I started a debug session. 
+After documenting the functionality of the methods and functions in kitchen_view I started a debug session. 
 
 ### The Debug session
 I chose to check what happens if I put a breakpoint in the get_specials method from the main.py file in the burger_orderer container. The variable that the breakpoint was set on was "burger_name = request.args.get("burger", default = "", type = str)" this made it so that when a burger was clicked, the burger name does not get sent to the kitchen_view and prevents any specials to appear for selection, this happens because the breakpoint makes the debugger pause execution right before the value of the 'burger' parameter gets extracted from the request. The breakpoint makes it possible to view the incoming request object and allows me to see if the correct value is assigned to the burger_name variable.
@@ -49,6 +49,10 @@ Carrying out the debugging session was a learning experience and was a bit compl
 I found this very useful as I can see how this could be used for when an error occur, instead of using prints to check every variable etc.
 
  
+## Most used Git Commands
+These commands were used througout the development of the project.
+
+git add, git commit, git switch, git branch, git status, git push, git pull, git clone, git fetch.
 
 
 
