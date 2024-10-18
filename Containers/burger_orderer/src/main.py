@@ -86,8 +86,7 @@ def new_order():
     order_data = request.get_json()
 
     target_url = KITCHEN_URL + 'newOrder'
-    print(order_data)
-    print(target_url)
+
     try:
         response = requests.post(target_url, json=order_data)
         return jsonify({"response": response.text}), response.status_code
